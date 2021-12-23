@@ -1,0 +1,219 @@
+@startuml
+class com.example.myprojekakhir.Activity.RegisterActivity {
+~ EditText etUsername
+~ Button btnRegister
+~ DatabaseHelper dbHelper
+# void onCreate(Bundle)
++ {static} Spanned fromHtml(String)
+}
+class com.example.myprojekakhir.BuildConfig {
++ {static} boolean DEBUG
++ {static} String APPLICATION_ID
++ {static} String BUILD_TYPE
++ {static} int VERSION_CODE
++ {static} String VERSION_NAME
+}
+class com.example.myprojekakhir.Activity.LoginActivity {
+~ EditText etUsername
+~ Button btnLogin
+~ DatabaseHelper dbHelper
+~ SharedPreferences sharedPreferences
+- {static} String SHARED_PREF_NAME
+- {static} String KEY_NAME
+- {static} String KEY_PASS
+# void onCreate(Bundle)
++ {static} Spanned fromHtml(String)
+}
+class com.example.myprojekakhir.Activity.CardActivity {
+- RecyclerView.Adapter adapter
+- RecyclerView recyclerViewList
+- ManagementCard managementCard
+- TextView totalFeeTxt
+- double tax
+- ScrollView scrollView
+# void onCreate(Bundle)
+- void bottomNavigation()
+- void initList()
+- void calculateCard()
+- void initView()
+}
+class com.example.myprojekakhir.Activity.StartActivity {
+~ Button startBtn
+# void onCreate(Bundle)
+}
+class com.example.myprojekakhir.ExampleUnitTest {
++ void addition_isCorrect()
+}
+class com.example.myprojekakhir.Domain.CategoryDomain {
+- String title
+- String pic
++ String getTitle()
++ void setTitle(String)
++ String getPic()
++ void setPic(String)
+}
+class com.example.myprojekakhir.Domain.FoodDomain {
+- String title
+- String pic
+- String description
+- int fee
+- int numberInCart
++ String getTitle()
++ void setTitle(String)
++ String getPic()
++ void setPic(String)
++ String getDescription()
++ void setDescription(String)
++ int getFee()
++ void setFee(int)
++ int getNumberInCart()
++ void setNumberInCart(int)
+}
+class com.example.myprojekakhir.ExampleInstrumentedTest {
++ void useAppContext()
+}
+class com.example.myprojekakhir.Adapter.CategoryAdapter {
+~ ArrayList<CategoryDomain> categoryDomains
++ ViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(ViewHolder,int)
++ int getItemCount()
+}
+class com.example.myprojekakhir.Adapter.CategoryAdapter.ViewHolder {
+~ TextView categoryName
+~ ImageView categoryPic
+~ ConstraintLayout mainLayout
+}
+class com.example.myprojekakhir.Helper.ManagementCard {
+- Context context
+- TinyDB tinyDB
++ void insertFood(FoodDomain)
++ ArrayList<FoodDomain> getListCard()
++ void plusNumberFood(ArrayList<FoodDomain>,int,ChangeNumberItemsListener)
++ void MinusNumerFood(ArrayList<FoodDomain>,int,ChangeNumberItemsListener)
++ Double getTotalFee()
+}
+class com.example.myprojekakhir.Activity.MainActivity {
+- RecyclerView.Adapter adapter
+- RecyclerView recyclerViewCategoryList
+# void onCreate(Bundle)
+- void bottomNavigation()
+- void recyclerViewPopular()
+- void recyclerViewCategory()
+}
+class com.example.myprojekakhir.Activity.ShowDetailActivity {
+- TextView addToCardBtn
+- TextView titleTxt
+- ImageView plusBtn
+- FoodDomain object
+- int numberOrder
+- ManagementCard managementCard
+# void onCreate(Bundle)
+- void getBundle()
+- void initView()
+}
+interface com.example.myprojekakhir.Interface.ChangeNumberItemsListener {
+~ void changed()
+}
+class com.example.myprojekakhir.Helper.DatabaseHelper {
++ {static} String DATABASE_NAME
++ {static} String TABLE_NAME
++ {static} String ROW_ID
++ {static} String ROW_USERNAME
++ {static} String ROW_PASSWORD
+- SQLiteDatabase db
++ void onCreate(SQLiteDatabase)
++ void onUpgrade(SQLiteDatabase,int,int)
++ void insertData(ContentValues)
++ boolean checkUser(String,String)
+}
+class com.example.myprojekakhir.Helper.TinyDB {
+- SharedPreferences preferences
+- String DEFAULT_APP_IMAGEDATA_DIRECTORY
+- String lastImagePath
++ Bitmap getImage(String)
++ String getSavedImagePath()
++ String putImage(String,String,Bitmap)
++ boolean putImageWithFullPath(String,Bitmap)
+- String setupFullPath(String)
+- boolean saveBitmap(String,Bitmap)
++ int getInt(String)
++ ArrayList<Integer> getListInt(String)
++ long getLong(String)
++ float getFloat(String)
++ double getDouble(String)
++ ArrayList<Double> getListDouble(String)
++ ArrayList<Long> getListLong(String)
++ String getString(String)
++ ArrayList<String> getListString(String)
++ boolean getBoolean(String)
++ ArrayList<Boolean> getListBoolean(String)
++ ArrayList<FoodDomain> getListObject(String)
++ T getObject(String,Class<T>)
++ void putInt(String,int)
++ void putListInt(String,ArrayList<Integer>)
++ void putLong(String,long)
++ void putListLong(String,ArrayList<Long>)
++ void putFloat(String,float)
++ void putDouble(String,double)
++ void putListDouble(String,ArrayList<Double>)
++ void putString(String,String)
++ void putListString(String,ArrayList<String>)
++ void putBoolean(String,boolean)
++ void putListBoolean(String,ArrayList<Boolean>)
++ void putObject(String,Object)
++ void putListObject(String,ArrayList<FoodDomain>)
++ void remove(String)
++ boolean deleteImage(String)
++ void clear()
++ Map<String,?> getAll()
++ void registerOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener)
++ void unregisterOnSharedPreferenceChangeListener(SharedPreferences.OnSharedPreferenceChangeListener)
++ {static} boolean isExternalStorageWritable()
++ {static} boolean isExternalStorageReadable()
+- void checkForNullKey(String)
+- void checkForNullValue(String)
+}
+class com.example.myprojekakhir.Adapter.PopularAdapter {
+~ ArrayList<FoodDomain> foodDomains
++ ViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(ViewHolder,int)
++ int getItemCount()
+}
+class com.example.myprojekakhir.Adapter.PopularAdapter.ViewHolder {
+~ TextView title
+~ ImageView pic
+~ TextView addBtn
+}
+class com.example.myprojekakhir.Adapter.CardListAdapter {
+- ArrayList<FoodDomain> foodDomains
+- ManagementCard managementCard
+- ChangeNumberItemsListener changeNumberItemsListener
++ ViewHolder onCreateViewHolder(ViewGroup,int)
++ void onBindViewHolder(ViewHolder,int)
++ int getItemCount()
+}
+class com.example.myprojekakhir.Adapter.CardListAdapter.ViewHolder {
+~ TextView title
+~ ImageView pic
+~ TextView totalEachItem
+}
+
+
+androidx.appcompat.app.AppCompatActivity <|-- com.example.myprojekakhir.Activity.RegisterActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.myprojekakhir.Activity.LoginActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.myprojekakhir.Activity.CardActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.myprojekakhir.Activity.StartActivity
+java.io.Serializable <|.. com.example.myprojekakhir.Domain.FoodDomain
+com.example.myprojekakhir.Adapter.Adapter <|-- com.example.myprojekakhir.Adapter.CategoryAdapter
+com.example.myprojekakhir.Adapter.CategoryAdapter +.. com.example.myprojekakhir.Adapter.CategoryAdapter.ViewHolder
+com.example.myprojekakhir.Adapter.ViewHolder <|-- com.example.myprojekakhir.Adapter.CategoryAdapter.ViewHolder
+androidx.appcompat.app.AppCompatActivity <|-- com.example.myprojekakhir.Activity.MainActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.myprojekakhir.Activity.ShowDetailActivity
+android.database.sqlite.SQLiteOpenHelper <|-- com.example.myprojekakhir.Helper.DatabaseHelper
+com.example.myprojekakhir.Adapter.Adapter <|-- com.example.myprojekakhir.Adapter.PopularAdapter
+com.example.myprojekakhir.Adapter.PopularAdapter +.. com.example.myprojekakhir.Adapter.PopularAdapter.ViewHolder
+com.example.myprojekakhir.Adapter.ViewHolder <|-- com.example.myprojekakhir.Adapter.PopularAdapter.ViewHolder
+com.example.myprojekakhir.Adapter.Adapter <|-- com.example.myprojekakhir.Adapter.CardListAdapter
+com.example.myprojekakhir.Adapter.CardListAdapter +.. com.example.myprojekakhir.Adapter.CardListAdapter.ViewHolder
+com.example.myprojekakhir.Adapter.ViewHolder <|-- com.example.myprojekakhir.Adapter.CardListAdapter.ViewHolder
+@enduml
